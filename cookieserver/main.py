@@ -44,6 +44,10 @@ def cookie(question: Annotated[str, Body()], cookie: Annotated[str, Body()]):
 def main():
     return FileResponse('index.html')
 
+@app.get("/keys")
+def keys():
+    return {"n": n, "e": e}
+
 @app.get("/src")
 def src():
     return FileResponse('main.py')

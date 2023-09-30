@@ -47,9 +47,10 @@
 			<button type=submit>*nom*</button>
 		</form>
 		<hr>
-		<small>As before, please submit both fields hex-encoded.<span style="float: right;"><a href="/src" target=_blank>View source</a></span></small>
+		<small>As before, please submit both fields hex-encoded.<span style="float: right;"><a href="/src" target=_blank id=srclink>View source</a></span></small>
 
 		<script>
+			srclink.href = location.pathname + srclink.pathname;
 			form.onsubmit = async function(e) {
 				e.preventDefault();
 				req = {question: question.value, cookie: cookie.value};
@@ -63,7 +64,7 @@
 
 				msg = ""
 				try{
-					res = await fetch("/cookie", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(req)});
+					res = await fetch(location.pathname + "/cookie", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(req)});
 					if (!res.ok) {
 						throw res.statusText
 					}
