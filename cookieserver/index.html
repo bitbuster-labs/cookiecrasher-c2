@@ -1,0 +1,80 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Poor Man's Flag Service</title>
+		<style type="text/css">
+			body {
+				margin:40px auto;
+				max-width:650px;
+				line-height:1.6;
+				font-size:18px;
+				color:#444;
+				padding: 0 10px
+			}
+			h1,h2,h3 {
+				line-height:1.2
+			}
+			input {
+				font-size: 20px;
+				height: 2em;
+				padding: 1.1em 0.5em;
+				width: 100%;
+				margin-bottom: 20px;
+				font-family: monospace;
+			}
+			button {
+				width: 100%;
+				line-height: 1.5em;
+				font-size: 20px;
+			}
+			.alert {
+				padding: 1em;
+				background: #ddd;
+				margin-top: 20px;
+				font-family: monospace;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Poor Man's Flag Service 🚩</h1>
+		<p>Ask nicely, and you shall receive a flag.</p>
+		<p>Don't forget to bring your cookie!</p>
+
+		<form id=form>
+			<input type=text id=question placeholder=" ... ?"></input>
+			<input type=text id=cookie placeholder=" 🍪"></input>
+			<button type=submit>*nom*</button>
+		</form>
+		<hr>
+		<small>As before, please submit both fields hex-encoded.<span style="float: right;"><a href="/src" target=_blank>View source</a></span></small>
+
+		<script>
+			form.onsubmit = async function(e) {
+				e.preventDefault();
+				req = {question: question.value, cookie: cookie.value};
+
+				if (window.div === undefined) {
+					div = document.createElement('div')
+					div.className = 'alert'
+					form.appendChild(div)
+				}
+				div.textContent = ""
+
+				msg = ""
+				try{
+					res = await fetch("/cookie", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(req)});
+					if (!res.ok) {
+						throw res.statusText
+					}
+					json = await res.json()
+					msg = json.message
+				} catch (e) {
+					msg = e
+				}
+				div.textContent = msg
+			}
+		</script>
+	</body>
+</html>
+

@@ -4,6 +4,8 @@ Two firmware versions are provided, the "standard" challenge firmware plus a "si
 
 Furthermore, solution.txt already provides the solution expected by the flagservice.
 
+cookieserver/ contains the full server side code
+
 ## Build instructions
 
 - Build micropython from master source according to docs
