@@ -1,0 +1,18 @@
+diff --git a/ports/rp2/mphalport.c b/ports/rp2/mphalport.c
+index f56c2bda1..4ce228c7f 100644
+--- a/ports/rp2/mphalport.c
++++ b/ports/rp2/mphalport.c
+@@ -75,11 +75,7 @@ void tud_cdc_rx_cb(uint8_t itf) {
+     for (uint32_t bytes_avail = tud_cdc_n_available(itf); bytes_avail > 0; --bytes_avail) {
+         if (ringbuf_free(&stdin_ringbuf)) {
+             int data_char = tud_cdc_read_char();
+-            if (data_char == mp_interrupt_char) {
+-                mp_sched_keyboard_interrupt();
+-            } else {
+-                ringbuf_put(&stdin_ringbuf, data_char);
+-            }
++            ringbuf_put(&stdin_ringbuf, data_char);
+         } else {
+             cdc_itf_pending |= (1 << itf);
+             return;
+
