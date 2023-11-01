@@ -1,4 +1,4 @@
-# CookieCrasher c.1 firmware and solutions
+# CookieCrasher c.2 firmware and solutions
 
 Two firmware versions are provided, the "standard" challenge firmware plus a "sidechannel" version that alternates a pin on every RSA mod-pow loop iteration.
 
